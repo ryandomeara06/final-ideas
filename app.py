@@ -1,3 +1,9 @@
+ode (metadata removed)
+Below is your file with all the garbage removed and the except block fixed.
+
+Copy/paste this EXACT version into your app.py:
+
+python
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -30,14 +36,25 @@ if st.sidebar.button("Get Data"):
 
     st.success(f"Data successfully extracted for {ticker}")
 
-    # -----------------------------
-    # COMPANY INFORMATION (SAFE)
-    # -----------------------------
     st.subheader("Company Information")
 
     try:
         info = stock.fast_info
     except Exception:
+        st.error("Company information unavailable due to Yahoo Finance rate limits.")
+        info = {}
+
+    company_name = info.get("longName", "N/A")
+    sector = info.get("sector", "N/A")
+    industry = info.get("industry", "N/A")
+    market_cap = info.get("marketCap", "N/A")
+    website = info.get("website", "N/A")
+
+    st.write(f"**Company Name:** {company_name}")
+    st.write(f"**Sector:** {sector}")
+    st.write(f"**Industry:** {industry}")
+    st.write(f"**Market Cap:** {market_cap}")
+    st.write(f"**Website:** {website}")
         st.error("Company information unavailable due to Yahoo Finance rate limits.")
         info = {}
 
