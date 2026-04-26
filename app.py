@@ -79,10 +79,6 @@ if st.sidebar.button("Get Data"):
     ax.set_xlabel("Date")
     ax.set_ylabel("Closing Price")
     st.pyplot(fig)
-
-    # -----------------------------
-    # MOVING AVERAGES & TREND
-    # -----------------------------
     st.subheader("Moving Averages and Trend Analysis")
 
     df["MA20"] = df["Close"].rolling(20).mean()
